@@ -6,6 +6,7 @@ import(
   "encoding/json"
   "net/http"
   "github.com/codegangsta/negroni"
+  "github.com/aldomatic/server/likes"
 )
 
 // Person struct
@@ -16,13 +17,18 @@ type Person struct {
     Sex string `json:"sex"`
     Likes Likes `json:"likes"`
 }
+func (this *Person) myNameIs(){
+  this.Name = "Mark"
+}
 
 type Likes struct {
   Drinking bool `json:"drinking"`
   PlayingGames bool `json:"playingGames"`
 }
 
+
 func main(){
+  fmt.Println(likes.HowManyLikes())
   mux := mux.NewRouter()
   mux.HandleFunc("/", IndexHandler).Methods("GET")
   n := negroni.Classic()
@@ -33,7 +39,11 @@ func main(){
 
 func IndexHandler(w http.ResponseWriter, r *http.Request){
   // Assign a new instance of Person with grouped fields
+  
   person := Person{"Oliver", "Developer", 25, "Male", Likes{true, false}}
+  person.myNameIs()
+  fmt.Println(person)
+
   // Encode the person variable to json bytes
   json, err := json.Marshal(person)
   if err != nil{

@@ -9,10 +9,17 @@ import(
 )
 
 // Person struct
-type Person struct{
+type Person struct {
     Name string `json:"name"`
     Title string `json:"title"`
     Age int `json:"age"`
+    Sex string `json:"sex"`
+    Likes Likes `json:"likes"`
+}
+
+type Likes struct {
+  Drinking bool `json:"drinking"`
+  PlayingGames bool `json:"playingGames"`
 }
 
 func main(){
@@ -26,7 +33,7 @@ func main(){
 
 func IndexHandler(w http.ResponseWriter, r *http.Request){
   // Assign a new instance of Person with grouped fields
-  person := Person{"Brian", "Developer", 25}
+  person := Person{"Oliver", "Developer", 25, "Male", Likes{true, false}}
   // Encode the person variable to json bytes
   json, err := json.Marshal(person)
   if err != nil{

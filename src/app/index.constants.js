@@ -1,10 +1,7 @@
-/* global malarkey:false, moment:false */
+/* global */
 (function() {
   'use strict';
 
   angular
     .module('angularGo')
-    // .constant('malarkey', malarkey)
-    // .constant('moment', moment);
-
 })();

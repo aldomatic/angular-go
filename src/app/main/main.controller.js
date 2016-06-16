@@ -6,15 +6,15 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout) {
+  function MainController($timeout, $log) {
     var vm = this;
-    vm.title = "Angular and Go!!"
+    vm.title = "Angular and Go!!";
     activate();
 
 
     function activate() {
       $timeout(function() {
-        console.log("active()")
+        $log.debug("active()");
       }, 3000);
     }
   }
